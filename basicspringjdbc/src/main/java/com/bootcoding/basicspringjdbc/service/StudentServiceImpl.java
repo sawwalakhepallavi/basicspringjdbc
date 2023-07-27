@@ -19,4 +19,11 @@ public class StudentServiceImpl implements StudentService{
        return repo.selectStudent(id);
 
     }
+
+
+
+    @Override
+    public Students updateStudent(Students s1) {
+        return repo.updateStudent(s1);
+    }
 }

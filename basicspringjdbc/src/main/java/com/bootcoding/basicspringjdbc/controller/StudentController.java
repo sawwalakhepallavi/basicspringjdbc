@@ -20,4 +20,9 @@ public class StudentController {
         return service.selectStudent(id);
     }
 
+    @PutMapping("/student")
+    public Students updateStudent(@RequestBody Students s1){
+        return service.updateStudent(s1);
+    }
+
 }
