@@ -5,6 +5,8 @@ import com.bootcoding.basicspringjdbc.model.Students;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class StudentRepoImp implements StudentRepo {
@@ -62,5 +64,29 @@ public class StudentRepoImp implements StudentRepo {
 
         }
         return s2;
+    }
+
+    @Override
+    public List<Students> getAllStudents() {
+        List<Students> stud=new ArrayList<>();
+        try{
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery("select * from students");
+            while(rs.next()) {
+                Students s=new Students();
+                s.setId(rs.getInt(1));
+                s.setName(rs.getString(2));
+                s.setMail(rs.getString(3));
+                stud.add(s);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return stud;
     }
 }

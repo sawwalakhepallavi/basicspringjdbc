@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class StudentController {
     @Autowired
@@ -23,6 +25,11 @@ public class StudentController {
     @PutMapping("/student")
     public Students updateStudent(@RequestBody Students s1){
         return service.updateStudent(s1);
+    }
+
+    @GetMapping("/Allstudent")
+    public List<Students> getAllStudents(){
+        return service.getAllStudents();
     }
 
 }
